@@ -1,0 +1,31 @@
+<div *ngIf="product">
+<h3>Tên Sản Phẩm Được Chọn: {{product.name}}</h3>
+  <table class="table">
+
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th >Tên</th>
+          <th>Ảnh</th>
+          <th>Mô tả</th>
+          <th >Số lượng</th>
+          <th >Giá</th>
+          <th >Giá cũ</th>
+          <th>Chi tiết</th>
+          <th>Ngày</th>
+          <th>Lượt xem</th>
+        </tr>
+      </thead>
+            <td (click)="toForm(product)">{{product.id}}</td>
+            <td (click)="toForm(product)" >{{product.name}}</td>
+            <td hidden (click)="toForm(product)">{{product.image}}</td>
+            <img style="height: 40px;width: 40px;" src="{{product.image}}">
+            <td (click)="toForm(product)">{{product.decription}}</td>
+            <td (click)="toForm(product)">{{product.quantity}}</td>
+            <td (click)="toForm(product)">{{product.price}}</td>
+            <td  (click)="toForm(product)">{{product.originalPrice}}</td>
+            <td (click)="toForm(product)">{{product.detail}}</td>
+            <td (click)="toForm(product)">{{product.dateCreated}}</td>
+            <td (click)="toForm(product)" >{{product.viewCount}}</td>
+  </table>
+</div>

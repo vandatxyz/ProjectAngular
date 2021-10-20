@@ -1,0 +1,42 @@
+
+  <ng-container>
+    <div class="row">
+      <div class="col my-4">
+        <table class="table">
+          <thead class="table-dark">
+          <tr class="text-center">
+            <th>Mã Giỏ Hàng</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Ảnh</th>
+            <th>Giá</th>
+            <th>Số Lượng</th>
+            <th>Tổng tiền</th>
+            <th>Thanh toán</th>
+            <th>.</th>
+          </tr>
+          </thead>
+
+            <tr class="text-center" *ngFor="let item of CartList|paginate:{itemsPerPage: 4, currentPage: p }">
+              <td>{{item.id}} </td>
+              <td>{{item.name}} </td>
+              <td><img style="width: 100px; height: 100px;" src="{{item.image}}"> </td>
+              <td>{{item.price}} </td>
+              <input type="number" style="text-align: center;" value="{{item.quantity}}">
+              <td>{{item.price*item.quantity}}</td>
+              <button class="btn btn-danger"[routerLink]="['/checkout/'+item.id]" >Thanh Toán</button>
+              <td></td>
+            <button class="btn btn-primary" (click)="deleteUser(item.id)" >Xóa</button>
+            </tr>
+        </table>
+<div> <pagination-controls (pageChange)= "p = $event"></pagination-controls></div>
+      </div>
+
+      <div class="col-md-12 d-flex mb-5">
+        <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+          <a routerLink="/home/product" class="btn btn-success btn-sm order-0">Về Trang Chủ</a>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
+

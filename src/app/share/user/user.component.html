@@ -1,0 +1,48 @@
+<div>
+  <div class="col-md-11">
+    <div class="card">
+      <div class="card-header">
+          <h3><b>User Table</b></h3>
+      </div>
+      <table class="table" style="margin: 12px;">
+          <tr>
+              <th>Name</th>
+              <th>Password</th>
+
+          </tr>
+
+          <tr *ngFor="let item of UserList">
+            <td (click)="toForm(item)">{{item.name}}</td>
+            <td (click)="toForm(item)">{{item.password}}</td>
+            <button class="btn btn-primary" (click)="deleteUser(item.id)">Xóa</button>
+          </tr>
+      </table>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-5">
+          <div class="card">
+              <div class="card-header">
+                  <h3><b>User Manage</b></h3>
+              </div>
+              <div class="card-body">
+                  <form #form = "ngForm" autocomplete="off"(submit)="OnSubmit(form)">
+                    <input type="hidden" name="id" #Id="ngModel" [(ngModel)]="user_service.formData.id">
+                      <div class="form-group">
+                          <input type="text" name="name" #Name="ngModel" [(ngModel)]="user_service.formData.name" class="form-control" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                          <input type="text"name="password" #Password="ngModel" [(ngModel)] = "user_service.formData.password" class="form-control" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                          <button class="btn btn-primary" type="submit"[disabled]="form.invalid">Submit</button>
+                          <!-- <span style="float: right;"><button class="btn btn-primary" type="submit"[disabled]="form.invalid">Sửa</button></span> -->
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

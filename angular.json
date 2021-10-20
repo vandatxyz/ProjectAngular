@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "PCOnline"
+  "defaultProject": "PCOnline",
+  "cli": {
+    "analytics": false
+  }
 }

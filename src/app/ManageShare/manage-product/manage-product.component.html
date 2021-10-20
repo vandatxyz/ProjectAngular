@@ -1,0 +1,95 @@
+
+<div>
+  <div class="col-md-13">
+    <div class="card">
+      <div class="card-header">
+          <h3><b>Bảng Sản Phẩm Khả Dụng</b></h3>
+      </div>
+      <nav class="navbar">
+        <input class="form-control" type = "text" name ="name" [(ngModel)]="name" (ngModelChange)="Search()"
+        placeholder="Tìm kiếm sản phẩm:">
+      </nav>
+      <table class="table">
+        <thead>
+          <tr>
+              <th (click)="Sort('id')">Id<i class="fa fa-sort"></i></th>
+              <th (click)="Sort('name')">Tên<i class="fa fa-sort"></i></th>
+              <th>Ảnh</th>
+              <th><i></i>Mô tả</th>
+              <th (click)="Sort('quantity')">Số lượng<i class="fa fa-sort"></i></th>
+              <th (click)="Sort('price')">Giá<i class="fa fa-sort"></i></th>
+              <th (click)="Sort('originalPrice')">Giá cũ<i class="fa fa-sort"></i></th>
+              <th><i></i>Chi tiết</th>
+              <th>Ngày<i class="fa fa-sort"></i></th>
+              <th (click)="Sort('viewCount')">Lượt xem</th>
+          </tr>
+        </thead>
+
+          <tr *ngFor="let item of ProductList | orderBy: key:reverse |paginate:{itemsPerPage: 5, currentPage: p }">
+            <td>{{item.id}}</td>
+            <td (click)="toForm(item)">{{item.name}}</td>
+            <td hidden (click)="toForm(item)">{{item.image}}</td>
+            <td><img width="60px" height="60px" src={{item.image}} alt="image"></td>
+            <td (click)="toForm(item)">{{item.decription}}</td>
+            <td (click)="toForm(item)">{{item.quantity}}</td>
+            <td (click)="toForm(item)">{{item.price}}</td>
+            <td (click)="toForm(item)">{{item.originalPrice}}</td>
+            <td (click)="toForm(item)">{{item.detail}}</td>
+            <td (click)="toForm(item)">{{item.dateCreated}}</td>
+            <td (click)="toForm(item)">{{item.viewCount}}</td>
+            <button class="btn btn-primary" (click)="deleteUser(item.id)">Xóa</button>
+          </tr>
+      </table>
+      <pagination-controls (pageChange)= "p = $event"></pagination-controls>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 50px;">
+  <div class="row">
+      <div class="col-md-5">
+          <div class="card">
+              <div class="card-header">
+                  <h3><b>Quản Lý Sản Phẩm</b></h3>
+              </div>
+              <div class="card-body">
+                  <form #form = "ngForm" autocomplete="off"(submit)="OnSubmit(form)">
+                    <input type="hidden" name="id" #Id="ngModel" [(ngModel)]="product_service.formData.id">
+                    <div class="form-group">
+                      <input type="text" name="Name" #Name = "ngModel" [(ngModel)] = "product_service.formData.name" class="form-control" placeholder="Name">
+                  </div>
+                  <div class="form-group">
+                    <p>Hình ảnh:</p>
+                      <input type="text"name="Image" #Image = "ngModel" [(ngModel)] = "product_service.formData.image" class="form-control" placeholder="Image">
+                  </div>
+                  <div class="form-group">
+                      <input type="text"name="Decriptions" #Decriptions = "ngModel" [(ngModel)] = "product_service.formData.decription" class="form-control" placeholder="Decriptions">
+                  </div>
+                  <div class="form-group">
+                      <input type="number"name="Quantity" #Quantity = "ngModel" [(ngModel)] = "product_service.formData.quantity" class="form-control" placeholder="Quantity">
+                  </div>
+                  <div class="form-group">
+                      <input type="number"name="Price" #Price = "ngModel" [(ngModel)] = "product_service.formData.price" class="form-control" placeholder="Price">
+                  </div>
+                  <div class="form-group">
+                      <input type="number"name="Origin-Price" #OriginPrice = "ngModel" [(ngModel)] = "product_service.formData.originalPrice" class="form-control" placeholder="Origin-Price">
+                  </div>
+                  <div class="form-group">
+                      <input type="text"name="Detail" #Detail = "ngModel" [(ngModel)] = "product_service.formData.detail" class="form-control" placeholder="Detail">
+                  </div>
+                  <div class="form-group">
+                      <input type="text"name="DateCreated" #DateCreated = "ngModel" [(ngModel)] = "product_service.formData.dateCreated" class="form-control" placeholder="DateCreated">
+                  </div>
+                  <div class="form-group">
+                      <input type="number" name="ViewCont" #ViewCont = "ngModel" [(ngModel)] = "product_service.formData.viewCount" class="form-control" placeholder="ViewCount">
+                  </div>
+                      <div class="form-group">
+                          <button class="btn btn-primary" type="submit"[disabled]="form.invalid">Submit</button>
+                      </div>
+                  </form>
+                  <button class="btn btn-primary" (click)="resetForm()">Reset</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
